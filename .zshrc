@@ -169,7 +169,7 @@ RPS1='$(prompt_exectime)'
 
 function chpwd() {
 	emulate -L zsh
-	ls -G
+	ls
 }
 
 export EDITOR="vim"
@@ -188,12 +188,22 @@ bindkey "${terminfo[kend]}" end-of-line
 
 bindkey "^[[3~" delete-char
 
-alias l="ls -G"
-alias ll="ls -lahG"
-alias ls="ls -G"
+if [[ `uname` == "Linux" ]]; then
+	alias l="ls --color=auto"
+	alias ll="ls -lah --color=auto"
+	alias ls="ls --color=auto"
+	alias dir="ls --color=auto"
+fi
+
+if [[ `uname` == "Darwin" ]]; then
+	alias l="ls -G"
+	alias ll="ls -lahG"
+	alias ls="ls -G"
+	alias dir="ls -G"
+fi
+
 alias cls="clear"
 alias g="git"
-alias dir="ls -G"
 
 alias ..="cd .."
 alias ...="cd ../.."
