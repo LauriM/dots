@@ -148,4 +148,4 @@ augroup end
 au BufRead,BufNewFile *.sqf,*.sqs  setf sqf
 
 "Get rid of the useless whitespace!
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
