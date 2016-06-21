@@ -173,7 +173,6 @@ function chpwd() {
 }
 
 export EDITOR="vim"
-export CXX=clang++
 
 HISTFILE=~/.zsh-history
 HISTSIZE=5000
