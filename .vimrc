@@ -57,11 +57,6 @@ syntax on
 set synmaxcol=2048
 set background=dark
 
-if exists("+undofile")
-	set undodir=~/vimfiles/tmp
-	set undofile
-endif
-
 set noswapfile
 set nobackup
 
