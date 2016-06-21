@@ -206,7 +206,7 @@ alias pu="pushd ."
 #HELPER FUNCTIONS
 
 function ss(){ #Search source
-	grep -inIEr --color=ALWAYS "$*" .
+	grep -inIEr --exclude-dir=.svn --color=ALWAYS "$*" .
 }
 
 function lsg(){ #ls grep

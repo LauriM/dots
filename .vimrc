@@ -25,11 +25,11 @@ else
 	"color darkblue
 	"color relaxedgreen
 	"color koehler
-	"color dante
+	color dante
 	"color delek
     "color rootwater
 	"color smyck
-	color solarized
+	"color solarized
 endif
 
 if has("win32") || has("win64")
