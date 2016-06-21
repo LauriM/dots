@@ -51,11 +51,12 @@ zle -N accept-line-custom; bindkey '^M' accept-line-custom
 function prompt_user(){
 	USERNAME=`whoami`
 	if [[ $USERNAME != 'lauri' && $USERNAME != 'laurim' ]]; then
-		echo "%F{yellow}"${USERNAME}
 
 		# Only display the @ if both hostname and username are different
 		if [ $SESSION_TYPE ]; then
-			echo "%F{white}@"
+			echo "%F{yellow}${USERNAME}%F{white}@"
+		else
+			echo "%F{yellow}"${USERNAME}""
 		fi
 	fi
 }
