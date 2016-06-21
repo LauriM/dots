@@ -14,5 +14,3 @@
     fix = commit --amend -C HEAD
 	lg = log --oneline --graph --decorate
 	l = log --oneline --decorate
-[push]
-	default = simple
