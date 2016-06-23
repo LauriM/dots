@@ -215,8 +215,18 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-alias po="popd"
-alias pu="pushd ."
+# Cross-session directory stack
+function pu(){
+	pwd >> ~/.dirs.txt
+}
+
+function po(){
+	cd `tail -n 1 ~/.dirs.txt` && sed -i '' -e '$ d' ~/.dirs.txt
+}
+
+function pd(){
+	cat ~/.dirs.txt
+}
 
 #HELPER FUNCTIONS
 
