@@ -170,7 +170,12 @@ RPS1='$(prompt_exectime)'
 
 function chpwd() {
 	emulate -L zsh
-	ls
+
+	if [[ `uname` == "Darwin" ]]; then
+		ls -G
+	else
+		ls --color=auto
+	fi
 }
 
 export EDITOR="vim"
