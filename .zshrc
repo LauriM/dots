@@ -94,17 +94,25 @@ function prompt_git(){
 		NEEDSPACE=1
 	fi
 
-	BRANCH=$(parse_git_branch | cut -d'/' -f3)
-	if [[ $BRANCH != "master" ]]; then
-		OUTPUT=${OUTPUT}"%F{green} ["${BRANCH}"]"
-		NEEDSPACE=1
-	fi
-
 	if [[ $NEEDSPACE == 1 ]]; then
 		OUTPUT=${OUTPUT}" "
 	fi
 
 	echo $OUTPUT
+}
+
+function prompt_branch() {
+	git ls-files -u >& /dev/null
+	if [[ $? != 0 ]]; then
+		return #No .git found! Abort!
+	fi
+
+	BRANCH=$(parse_git_branch | cut -d'/' -f3)
+
+
+	if [[ $BRANCH != "master" ]]; then
+		echo "%F{green}["${BRANCH}"] "
+	fi
 }
 
 function prompt_svn(){
@@ -169,7 +177,7 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-PS1='%F{white}$(prompt_user)%F{yellow}$(prompt_hostname)$(prompt_jobs)$(prompt_git)%F{white}$(prompt_dir)%(?.%F{green}.%F{red})${VIMODE} %f'
+PS1='%F{white}$(prompt_user)%F{yellow}$(prompt_hostname)$(prompt_jobs)$(prompt_git)%F{white}$(prompt_dir)$(prompt_branch)%(?.%F{green}.%F{red})${VIMODE} %f'
 RPS1='$(prompt_exectime)'
 
 function chpwd() {
