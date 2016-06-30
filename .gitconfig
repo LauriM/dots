@@ -15,4 +15,4 @@
 	lg = log --oneline --graph --decorate
 	l = log --oneline --decorate
 [push]
-	default = simple
+	default = matching
