@@ -262,6 +262,14 @@ function gs(){ #grep search
 	grep -inIEr --color=ALWAYS "$*" .
 }
 
+# Calculator
+function = 
+{
+	echo "$@" | bc -l
+}
+
+alias calc="="
+
 #------------
 
 # Rust helpers
