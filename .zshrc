@@ -168,6 +168,19 @@ function prompt_jobs(){
 	fi
 }
 
+# check internal version of the dots files
+function prompt_version() {
+	# don't check if we don't have the file
+	if [ -f ~/.dots_version_hash ]; then
+		CURRENT=`git --git-dir="$HOME/dots/.git" --work-tree="$HOME/dots" rev-parse HEAD`
+
+		if [[ `cat ~/.dots_version_hash | grep $CURRENT` == "" ]]; then
+			echo "%F{cyan}>"
+		fi
+
+	fi
+}
+
 VIMODE='$'
 function zle-line-init zle-keymap-select {
 	VIMODE="${${KEYMAP/vicmd/#}/(main|viins)/$}"
@@ -177,7 +190,7 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-PS1='%F{white}$(prompt_user)%F{yellow}$(prompt_hostname)$(prompt_jobs)$(prompt_git)%F{white}$(prompt_dir)$(prompt_branch)%(?.%F{green}.%F{red})${VIMODE} %f'
+PS1='%F{white}$(prompt_version)$(prompt_user)%F{yellow}$(prompt_hostname)$(prompt_jobs)$(prompt_git)%F{white}$(prompt_dir)$(prompt_branch)%(?.%F{green}.%F{red})${VIMODE} %f'
 RPS1='$(prompt_exectime)'
 
 function chpwd() {
@@ -296,3 +309,13 @@ if [ -f ~/.zshrc_local ]; then
 	source ~/.zshrc_local
 fi
 
+
+function retrieve_latest_version() {
+	git ls-remote http://github.com/laurim/dots HEAD > ~/.dots_version_hash_temp
+
+	# Moving to prevent empty file being present
+	mv ~/.dots_version_hash_temp ~/.dots_version_hash
+}
+
+# Retrieve latest dots version on background
+( retrieve_latest_version > /dev/null 2>&1 & )
