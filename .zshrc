@@ -239,6 +239,7 @@ alias g="git"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias foldersize="du -h --max-depth=1 | sort -hr"
 
 # Cross-session directory stack
 function pu(){
