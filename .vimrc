@@ -61,13 +61,12 @@ set ignorecase
 set smartcase
 set hlsearch
 set incsearch
+set autoindent
 
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set noexpandtab
-set shiftround
-set autoindent
 
 "By default
 let g:SuperTabDefaultCompletionType = "<c-p>"
@@ -147,5 +146,5 @@ augroup end
 
 au BufRead,BufNewFile *.sqf,*.sqs  setf sqf
 
-"Get rid of the useless whitespace!
-"autocmd BufWritePre * :%s/\s\+$//e
+" I don't want the wierd style thats suggested
+let g:rust_recommended_style = 0
