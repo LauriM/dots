@@ -145,6 +145,3 @@ augroup filetype
 augroup end
 
 au BufRead,BufNewFile *.sqf,*.sqs  setf sqf
-
-" I don't want the wierd style thats suggested
-let g:rust_recommended_style = 0
