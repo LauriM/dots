@@ -276,6 +276,10 @@ function gs(){ #grep search
 	grep -inIEr --color=ALWAYS "$*" .
 }
 
+function f(){
+	find . -name "*$**"
+}
+
 # Calculator
 function = 
 {
