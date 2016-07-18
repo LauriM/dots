@@ -298,6 +298,16 @@ function zsh_stats() {
 	fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n20
 }
 
+# Make a notification (ring) after a command is done
+function ring(){
+
+	typeset -gi START=SECONDS
+	$@
+	typeset -gi DURATION=SECONDS-START
+
+	osascript -e "display notification \"Command $0 has finished in $DURATION seconds.\" with title \"Ring\""
+}
+
 # Load plugins
 source ~/dots/extract.plugin.zsh
 
