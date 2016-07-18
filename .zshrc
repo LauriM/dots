@@ -305,7 +305,7 @@ function ring(){
 	$@
 	typeset -gi DURATION=SECONDS-START
 
-	osascript -e "display notification \"Command $0 has finished in $DURATION seconds.\" with title \"Ring\""
+	osascript -e "display notification \"Command $1 has finished in $DURATION seconds.\" with title \"Ring\""
 }
 
 # Load plugins
