@@ -235,6 +235,7 @@ fi
 
 alias cls="clear"
 alias g="git"
+alias d="docker"
 
 alias ..="cd .."
 alias ...="cd ../.."
