@@ -280,6 +280,10 @@ function f(){
 	find . -name "*$**"
 }
 
+function dots_update(){
+	git --git-dir="$HOME/dots/.git" --work-tree="$HOME/dots" pull &
+}
+
 # Calculator
 function = 
 {
