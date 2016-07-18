@@ -237,6 +237,8 @@ alias cls="clear"
 alias g="git"
 alias d="docker"
 
+alias cb="cargo build"
+alias cr="cargo run"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -290,18 +292,14 @@ function =
 {
 	echo "$@" | bc -l
 }
-
 alias calc="="
-
-#------------
-
-# Rust helpers
-alias cb="cargo build"
-alias cr="cargo run"
 
 function zsh_stats() {
 	fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n20
 }
+
+# Load plugins
+source ~/dots/extract.plugin.zsh
 
 # Scan for nocorrect commands
 if [ -f ~/.zsh_nocorrect ]; then
