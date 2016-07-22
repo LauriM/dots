@@ -53,7 +53,7 @@ function prompt_user(){
 
 		# Only display the @ if both hostname and username are different
 		if [ $SESSION_TYPE ]; then
-			echo "%F{yellow}${USERNAME}%F{white}@"
+			echo "%F{yellow}${USERNAME}%F{yellow}@"
 		else
 			echo "%F{yellow}"${USERNAME}""
 		fi
