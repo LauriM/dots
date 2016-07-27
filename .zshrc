@@ -310,7 +310,12 @@ function ring(){
 
 # Load plugins
 source ~/dots/extract.plugin.zsh
-source ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+if  [ -f ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+	source ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh
+else
+	echo "! Remember to update submodules !"
+fi
 
 # Scan for nocorrect commands
 if [ -f ~/.zsh_nocorrect ]; then
