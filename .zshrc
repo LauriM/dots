@@ -311,10 +311,12 @@ function ring(){
 # Load plugins
 source ~/dots/extract.plugin.zsh
 
-if  [ -f ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-	source ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh
-else
-	echo "! Remember to update submodules !"
+if [[ `uname` == "Darwin" ]]; then
+	if  [ -f ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+		source ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh
+	else
+		echo "! Remember to update submodules !"
+	fi
 fi
 
 # Scan for nocorrect commands
