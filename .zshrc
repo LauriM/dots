@@ -308,6 +308,13 @@ function ring(){
 	reattach-to-user-namespace osascript -e "display notification \"Command $1 has finished in $DURATION seconds.\" with title \"Ring\""
 }
 
+# Handle display param so that X-forwarding works in tmux
+if [ -z "$STY" -a -z "$TMUX" ]; then
+	echo $DISPLAY > ~/.display.txt
+else
+	export DISPLAY=`cat ~/.display.txt`
+fi
+
 # Load plugins
 source ~/dots/extract.plugin.zsh
 
