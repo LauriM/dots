@@ -313,7 +313,10 @@ source ~/dots/extract.plugin.zsh
 
 if [[ `uname` == "Darwin" ]]; then
 	if  [ -f ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-		source ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh
+		# Tmux causes issues with this plugin
+		if [ -z "$TMUX" ]; then
+			source ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh
+		fi
 	else
 		echo "! Remember to update submodules !"
 	fi
