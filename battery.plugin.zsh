@@ -40,7 +40,7 @@ if [[ "$OSTYPE" = darwin* ]] ; then
         echo "~$((timeremaining / 60)):$((timeremaining % 60))"
       fi
     else
-      echo "∞"
+      #echo "∞"
     fi
   }
 
@@ -60,7 +60,7 @@ if [[ "$OSTYPE" = darwin* ]] ; then
       fi
       echo "%{$fg[$color]%}[$(battery_pct_remaining)%%]%{$reset_color%}"
     else
-      echo "∞"
+      #echo "∞"
     fi
   }
 
@@ -106,7 +106,7 @@ elif [[ $(uname) == "Linux"  ]] ; then
       fi
       echo "%{$fg[$color]%}[$(battery_pct_remaining)%%]%{$reset_color%}"
     else
-      echo "∞"
+      #echo "∞"
     fi
   }
 
