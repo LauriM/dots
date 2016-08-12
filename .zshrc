@@ -287,6 +287,10 @@ function dots_update(){
 	git --git-dir="$HOME/dots/.git" --work-tree="$HOME/dots" pull &
 }
 
+function n(){
+	vim ~/.scratch.txt
+}
+
 # Calculator
 function = 
 {
