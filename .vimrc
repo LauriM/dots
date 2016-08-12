@@ -78,7 +78,7 @@ cmap wQ wq
 cmap Q q
 
 "ignores
-set wildignore+=*.class,*.exe,*.log,*.tlog,*pdb,*.ilk,*obj,*/_site/*,*/.git/*,*/_gist_cache/*,*/node_modules/*,*.o,*.a,*.tmp,./html/,._*
+set wildignore+=*.class,*.exe,*.log,*.tlog,*pdb,*.ilk,*obj,*/_site/*,*/.git/*,*/_gist_cache/*,*/node_modules/*,*.o,*.a,*.tmp,./html/,._*,*.pp
 
 "Hide hilights with return
 :nnoremap <CR> :nohlsearch<CR>/<BS>
