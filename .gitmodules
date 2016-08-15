@@ -4,3 +4,6 @@
 [submodule "zsh-autosuggestions"]
 	path = zsh-autosuggestions
 	url = git@github.com:zsh-users/zsh-autosuggestions.git
+[submodule "vimfiles/bundle/gundo.vim"]
+	path = vimfiles/bundle/gundo.vim
+	url = http://github.com/sjl/gundo.vim.git
