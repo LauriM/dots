@@ -67,49 +67,6 @@ if [[ "$OSTYPE" = darwin* ]] ; then
   function battery_is_charging() {
     [[ $(ioreg -rc "AppleSmartBattery"| grep '^.*"IsCharging"\ =\ ' | sed -e 's/^.*"IsCharging"\ =\ //') == "Yes" ]]
   }
-
-elif [[ $(uname) == "Linux"  ]] ; then
-
-  function battery_is_charging() {
-    ! [[ $(acpi 2&>/dev/null | grep -c '^Battery.*Discharging') -gt 0 ]]
-  }
-
-  function battery_pct() {
-    if (( $+commands[acpi] )) ; then
-      echo "$(acpi | cut -f2 -d ',' | tr -cd '[:digit:]')"
-    fi
-  }
-
-  function battery_pct_remaining() {
-    if [ ! $(battery_is_charging) ] ; then
-      battery_pct
-    else
-      echo "External Power"
-    fi
-  }
-
-  function battery_time_remaining() {
-    if [[ $(acpi 2&>/dev/null | grep -c '^Battery.*Discharging') -gt 0 ]] ; then
-      echo $(acpi | cut -f3 -d ',')
-    fi
-  }
-
-  function battery_pct_prompt() {
-    b=$(battery_pct_remaining) 
-    if [[ $(acpi 2&>/dev/null | grep -c '^Battery.*Discharging') -gt 0 ]] ; then
-      if [ $b -gt 50 ] ; then
-        color='green'
-      elif [ $b -gt 20 ] ; then
-        color='yellow'
-      else
-        color='red'
-      fi
-      echo "%{$fg[$color]%}[$(battery_pct_remaining)%%]%{$reset_color%}"
-    else
-      #echo "∞"
-    fi
-  }
-
 else
   # Empty functions so we don't cause errors in prompts
   function battery_pct_remaining() {
