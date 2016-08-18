@@ -130,6 +130,7 @@ nmap <C-S-Tab> :tabp<CR>
 nmap <C-n> :tab new<CR>
 
 map <C-t> :split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <C-y> :tab new<CR>:exec("tag ".expand("<cword>"))<CR>
 
 nmap § :tabn<CR>
 
