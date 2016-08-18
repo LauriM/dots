@@ -129,6 +129,8 @@ nmap <C-Tab> :tabn<CR>
 nmap <C-S-Tab> :tabp<CR>
 nmap <C-n> :tab new<CR>
 
+map <C-t> :split<CR>:exec("tag ".expand("<cword>"))<CR>
+
 nmap § :tabn<CR>
 
 nnoremap <leader>p p
