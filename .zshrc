@@ -286,6 +286,7 @@ function f(){
 
 function dots_update(){
 	git --git-dir="$HOME/dots/.git" --work-tree="$HOME/dots" pull &
+	retrieve_latest_version()
 }
 
 function n(){
