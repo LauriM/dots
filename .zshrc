@@ -190,7 +190,7 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 PS1='%F{white}$(prompt_version)$(prompt_user)%F{yellow}$(prompt_hostname)$(prompt_jobs)$(prompt_git)%F{white}$(prompt_dir)$(prompt_branch)%(?.%F{green}.%F{red})${VIMODE} %f'
-RPS1='$(prompt_exectime) $(battery_pct_prompt)'
+RPS1='$(prompt_exectime)' 
 
 function chpwd() {
 	emulate -L zsh
@@ -316,7 +316,6 @@ function ring(){
 
 # Load plugins
 source ~/dots/extract.plugin.zsh
-source ~/dots/battery.plugin.zsh
 
 if [[ `uname` == "Darwin" ]]; then
 	if  [ -f ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
