@@ -8,6 +8,10 @@ set nomodeline
 let mapleader=","
 let maplocalleader=","
 
+if filereadable(glob("~/.vimrc_local"))
+	source ~/.vimrc_local
+end
+
 call pathogen#infect()
 
 "gvim
