@@ -243,7 +243,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias foldersize="du -h --max-depth=1 | sort -hr"
 alias logout="clear && exit"
-alias tags="ctags -R ."
+alias tags="ctags -R . && cat tags | wc -l"
 
 # Cross-session directory stack
 function pu(){
