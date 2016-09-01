@@ -264,6 +264,10 @@ function ss(){ #Search source
 	grep -inIEr --exclude-dir=.svn --color=ALWAYS "$*" .
 }
 
+function sss(){ #Search source in src/
+	grep -inIEr --exclude-dir=.svn --color=ALWAYS "$*" ./src/
+}
+
 function lsg(){ #ls grep
 	ls -lah | grep -i $*
 }
