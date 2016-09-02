@@ -243,7 +243,6 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias foldersize="du -h --max-depth=1 | sort -hr"
 alias logout="clear && exit"
-alias tags="ctags -R . && cat tags | wc -l tags"
 
 # Cross-session directory stack
 function pu(){
@@ -295,6 +294,15 @@ function dots_update(){
 
 function n(){
 	vim ~/.scratch.txt
+}
+
+function tags() {
+	A=`cat tags|wc -l`
+	ctags -R .
+	B=`cat tags|wc -l`
+	typeset -gi D=B-A
+
+	echo "$B tags, diff: $D"
 }
 
 # Calculator
