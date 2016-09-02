@@ -10,3 +10,6 @@
 [submodule "vimfiles/bundle/ctrlp.vim"]
 	path = vimfiles/bundle/ctrlp.vim
 	url = git@github.com:ctrlpvim/ctrlp.vim.git
+[submodule "vimfiles/bundle/vim-sleuth"]
+	path = vimfiles/bundle/vim-sleuth
+	url = git@github.com:tpope/vim-sleuth.git
