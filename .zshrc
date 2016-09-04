@@ -106,8 +106,8 @@ function prompt_branch() {
 		return #No .git found! Abort!
 	fi
 
-	BRANCH=$(parse_git_branch | cut -d'/' -f3)
-
+	BRANCH=$(parse_git_branch)
+	BRANCH="${BRANCH/refs\/\heads\//}"
 
 	if [[ $BRANCH != "master" ]]; then
 		echo "%F{green}["${BRANCH}"] "
