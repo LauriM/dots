@@ -3,13 +3,13 @@
 	url = https://github.com/rust-lang/rust.vim.git
 [submodule "zsh-autosuggestions"]
 	path = zsh-autosuggestions
-	url = git@github.com:zsh-users/zsh-autosuggestions.git
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
 [submodule "vimfiles/bundle/gundo.vim"]
 	path = vimfiles/bundle/gundo.vim
 	url = http://github.com/sjl/gundo.vim.git
 [submodule "vimfiles/bundle/ctrlp.vim"]
 	path = vimfiles/bundle/ctrlp.vim
-	url = git@github.com:ctrlpvim/ctrlp.vim.git
+	url = https://github.com/kien/ctrlp.vim.git
 [submodule "vimfiles/bundle/vim-sleuth"]
 	path = vimfiles/bundle/vim-sleuth
-	url = git@github.com:tpope/vim-sleuth.git
+	url = https://github.com/tpope/vim-sleuth.git
