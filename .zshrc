@@ -205,8 +205,8 @@ function chpwd() {
 export EDITOR="vim"
 
 HISTFILE=~/.zsh-history
-HISTSIZE=5000
-SAVEHIST=5000
+HISTSIZE=15000
+SAVEHIST=15000
 
 zstyle ':completion:*' menu select
 
@@ -230,6 +230,7 @@ if [[ `uname` == "Darwin" ]]; then
 	alias ll="ls -lahG"
 	alias ls="ls -G"
 	alias dir="ls -G"
+	export HOMEBREW_NO_EMOJI=1
 fi
 
 alias cls="clear"
