@@ -1,18 +1,19 @@
 [user]
-	name = Lauri Mäkinen
-	email = lauri.sakari.makinen@gmail.com
+    name = Lauri Mäkinen
+    email = lauri.sakari.makinen@gmail.com
 [core]
-	whitespace = trailing-space,space-before-tab
+    whitespace = trailing-space,space-before-tab
 [color]
-	ui = auto
+    ui = auto
 [alias]
-	c = commit
-	s = status
-	c = commit
-	d = diff
-	b = branch
+    c = commit
+    s = status
+    c = commit
+    co = checkout
+    d = diff
+    b = branch
     fix = commit --amend -C HEAD
-	lg = log --oneline --graph --decorate
-	l = log --oneline --decorate
+    lg = log --oneline --graph --decorate
+    l = log --oneline --decorate
 [push]
-	default = matching
+    default = matching
