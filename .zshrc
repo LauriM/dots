@@ -237,6 +237,7 @@ alias cls="clear"
 alias g="git"
 alias d="docker"
 
+
 alias cb="cargo build"
 alias cr="cargo run"
 alias ..="cd .."
@@ -295,6 +296,10 @@ function dots_update(){
 
 function n(){
 	vim ~/.scratch.txt
+}
+
+function dps() {
+	docker ps | perl -ne '@cols = split /\s{2,}/, $_; printf "%30s %20s %20s\n", $cols[1], $cols[2], $cols[4]'
 }
 
 function tags() {
