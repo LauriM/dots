@@ -13,3 +13,6 @@
 [submodule "vimfiles/bundle/vim-sleuth"]
 	path = vimfiles/bundle/vim-sleuth
 	url = https://github.com/tpope/vim-sleuth.git
+[submodule "vimfiles/bundle/grep.vim"]
+	path = vimfiles/bundle/grep.vim
+	url = https://github.com/vim-scripts/grep.vim
