@@ -126,7 +126,9 @@ nmap <C-X> :FSHere<CR>
 
 nmap <F7> :NERDTreeToggle<cr>
 
-set pastetoggle=<F9>
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
 
 nmap <F12> :tab sball<CR>
 nmap <C-Tab> :tabn<CR>
