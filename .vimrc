@@ -5,44 +5,16 @@
 set nocompatible
 set nomodeline
 
-let mapleader=","
-let maplocalleader=","
-
-if filereadable(glob("~/.vimrc_local"))
-	source ~/.vimrc_local
-end
-
 call pathogen#infect()
 
-"gvim
-if has("gui_running")
-    set guioptions=ac
-    set guifont=Consolas:h10:cANSI
-    winpos 1 1
-    set lines=999
-    set columns=999
-	set cursorline
-	set cursorcolumn
-	color badwolf
-	"color solarized
-else
-	"color darkblue
-	"color relaxedgreen
-	"color koehler
-	color dante
-	"color delek
-    "color rootwater
-	"color smyck
-	"color solarized
-endif
-
-if has("win32") || has("win64")
-	map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-end
-
+" ###################
+" Generic vim options
+" ###################
 syntax on
 set synmaxcol=2048
 set background=dark
+let mapleader=","
+let maplocalleader=","
 
 set noswapfile
 set nobackup
@@ -68,18 +40,44 @@ set softtabstop=4
 set shiftwidth=4
 set noexpandtab
 
-"By default
-let g:SuperTabDefaultCompletionType = "<c-p>"
+" #############################
+" Platform/gui specific options
+" #############################
+
+if has("gui_running")
+  set guioptions=ac
+  set guifont=Consolas:h10:cANSI
+  winpos 1 1
+  set lines=999
+  set columns=999
+  set cursorline
+  set cursorcolumn
+  color badwolf
+  "color solarized
+else
+  "color darkblue
+  "color relaxedgreen
+  "color koehler
+  color dante
+  "color delek
+  "color rootwater
+  "color smyck
+  "color solarized
+endif
+
+if has("win32") || has("win64")
+  map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+end
+
+" ################
+" General keybinds
+" ################
 
 "Common typos
 cmap W w
 cmap WQ wq
 cmap wQ wq
 cmap Q q
-
-"ignores
-set wildignore+=*.class,*.exe,*.log,*.tlog,*pdb,*.ilk,*obj,*/_site/*,*/.git/*,*/_gist_cache/*,*/node_modules/*,*.o,*.a,*.tmp,./html/,._*,*.pp
-
 "Hide hilights with return
 :nnoremap <CR> :nohlsearch<CR>/<BS>
 
@@ -98,6 +96,26 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
+nmap <C-X> :FSHere<CR>
+nmap <F7> :NERDTreeToggle<cr>
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
+map <C-t> :split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <C-y> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+
+nnoremap <leader>p p
+nnoremap <leader>P P
+nnoremap p p'[v']=
+nnoremap P P'[v']=
+
+nnoremap <space> za
+vnoremap <space> zf
+
+" ###################
+" Rest of the options
+" ###################
+
 "tags
 set tags=./tags;/;tags-static
 set ofu=syntaxcomplete#Complete
@@ -106,7 +124,17 @@ set ofu=syntaxcomplete#Complete
 set stl=%f\ %m\ %r\ Line:\ %l/%L[%p%%]\ Col:\ %c\ Buf:\ #%n
 set laststatus=2
 
+"ignores
+set wildignore+=*.class,*.exe,*.log,*.tlog,*pdb,*.ilk,*obj,*/_site/*,*/.git/*,*/_gist_cache/*,*/node_modules/*,*.o,*.a,*.tmp,./html/,._*,*.pp
+
 let g:ctrlp_working_path_mode = 0
+
+"By default
+let g:SuperTabDefaultCompletionType = "<c-p>"
+
+" ############
+" Autocommands
+" ############
 
 "Automatically add gates for .h files
 function! s:insert_gates()
@@ -118,33 +146,6 @@ function! s:insert_gates()
 endfunction
 autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
 
-nmap <C-X> :FSHere<CR>
-
-nmap <F7> :NERDTreeToggle<cr>
-
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
-
-nmap <F12> :tab sball<CR>
-nmap <C-Tab> :tabn<CR>
-nmap <C-S-Tab> :tabp<CR>
-nmap <C-n> :tab new<CR>
-
-map <C-t> :split<CR>:exec("tag ".expand("<cword>"))<CR>
-map <C-y> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-
-nmap § :tabn<CR>
-
-nnoremap <leader>p p
-nnoremap <leader>P P
-nnoremap p p'[v']=
-nnoremap P P'[v']=
-
-"Toggle fold or create fold with space
-nnoremap <space> za
-vnoremap <space> zf
-
 augroup filetype
   au! BufRead,BufNewFile *.proto setfiletype proto
 augroup end
@@ -152,4 +153,12 @@ augroup end
 au BufRead,BufNewFile *.sqf,*.sqs  setf sqf
 
 au BufRead,BufNewFile *.go map <F5> :GoBuild<CR>
+
+" ####################
+" Load local additions
+" ####################
+"
+if filereadable(glob("~/.vimrc_local"))
+  source ~/.vimrc_local
+end
 
