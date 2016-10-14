@@ -19,3 +19,6 @@
 [submodule "vimfiles/bundle/vim-go"]
 	path = vimfiles/bundle/vim-go
 	url = https://github.com/fatih/vim-go.git
+[submodule "vimfiles/bundle/vim-startify"]
+	path = vimfiles/bundle/vim-startify
+	url = https://github.com/mhinz/vim-startify

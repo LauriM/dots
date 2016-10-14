@@ -40,10 +40,6 @@ if has("win32") || has("win64")
 	map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 end
 
-if has("unix")
-	map <F5> :make<CR>
-end
-
 syntax on
 set synmaxcol=2048
 set background=dark
@@ -154,3 +150,6 @@ augroup filetype
 augroup end
 
 au BufRead,BufNewFile *.sqf,*.sqs  setf sqf
+
+au BufRead,BufNewFile *.go map <F5> :GoBuild<CR>
+
