@@ -22,3 +22,6 @@
 [submodule "vimfiles/bundle/vim-startify"]
 	path = vimfiles/bundle/vim-startify
 	url = https://github.com/mhinz/vim-startify
+[submodule "vimfiles/bundle/vim-node"]
+	path = vimfiles/bundle/vim-node
+	url = git@github.com:moll/vim-node.git
