@@ -50,8 +50,8 @@ if has("gui_running")
   winpos 1 1
   set lines=999
   set columns=999
-  set cursorline
-  set cursorcolumn
+  "set cursorline
+  "set cursorcolumn
   color badwolf
   "color solarized
 else
