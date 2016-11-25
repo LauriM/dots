@@ -231,6 +231,7 @@ if [[ `uname` == "Darwin" ]]; then
 	alias ls="ls -G"
 	alias dir="ls -G"
 	export HOMEBREW_NO_EMOJI=1
+	export HOMEBREW_NO_ANALYTICS=1
 fi
 
 alias cls="clear"
