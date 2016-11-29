@@ -25,3 +25,6 @@
 [submodule "vimfiles/bundle/vim-node"]
 	path = vimfiles/bundle/vim-node
 	url = git@github.com:moll/vim-node.git
+[submodule "vimfiles/bundle/Align"]
+	path = vimfiles/bundle/Align
+	url = git@github.com:vim-scripts/Align.git
