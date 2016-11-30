@@ -149,10 +149,29 @@ function prompt_dir(){
 	fi
 
 	if [[ -w $PWD ]]; then
-		echo "%~ "
+		PREFIX=`echo ""`
 	else
-		echo "%F{red}%~ "
+		PREFIX=`echo "%F{red}"`
 	fi
+
+	DIR_LENGHT=$(pwd|wc -m)
+
+	# Desired target for command spacing is 15 chars
+	typeset -gi TARGETLENGHT=COLUMNS-15
+
+	if [[ $DIR_LENGHT -ge $TARGETLENGHT ]]; then
+		# Count how much we need to remove
+		typeset -gi TO_BE_REMOVED=DIR_LENGHT-TARGETLENGHT
+		typeset -gi PART_TWO_START=13+TO_BE_REMOVED
+
+		A=`pwd|cut -c1-10`
+		B=`pwd|cut -c$PART_TWO_START-999`
+
+		echo "$PREFIX$A...$B "
+	else
+		echo "$PREFIX%~ "
+	fi
+
 }
 
 function prompt_time(){
