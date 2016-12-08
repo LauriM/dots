@@ -256,6 +256,7 @@ fi
 alias cls="clear"
 alias g="git"
 alias d="docker"
+alias k="kubectl"
 
 alias glo='git log --oneline --decorate'
 alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
