@@ -266,6 +266,7 @@ alias gloga='git log --oneline --decorate --graph --all'
 
 alias cb="cargo build"
 alias cr="cargo run"
+alias ct="cargo test"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
