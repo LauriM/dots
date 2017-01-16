@@ -110,7 +110,18 @@ function prompt_branch() {
 	BRANCH="${BRANCH/refs\/\heads\//}"
 
 	if [[ $BRANCH != "master" ]]; then
-		echo "%F{green}["${BRANCH}"] "
+
+		DIR_LENGHT=$(pwd|wc -m)
+		BRANCH_LENGHT=$(echo $BRANCH|wc -m)
+		typeset -gi TARGETLENGHT=COLUMNS-25
+
+		if [[ $DIR_LENGHT -ge $TARGETLENGHT ]]; then
+			# Cut the branch display, not enough space
+			echo "%F{green}[%F{white}..%F{green}] "
+		else
+			# Regular branch display, no need to cut it
+			echo "%F{green}["${BRANCH}"] "
+		fi
 	fi
 }
 
