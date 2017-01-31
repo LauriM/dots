@@ -291,6 +291,7 @@ alias ....="cd ../../.."
 alias foldersize="du -h --max-depth=1 | sort -hr"
 alias logout="clear && exit"
 alias kcc="kubectl config current-context"
+alias reload="source ~/.zshrc"
 
 # Cross-session directory stack
 function pu(){
