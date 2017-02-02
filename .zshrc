@@ -1,3 +1,8 @@
+#!/bin/zsh
+
+# #######
+# Options
+# #######
 autoload promptinit compinit
 promptinit
 compinit
@@ -12,6 +17,75 @@ setopt hist_save_no_dups
 unsetopt beep
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select
+
+export EDITOR="vim"
+export HISTFILE=~/.zsh-history
+export HISTSIZE=15000
+export SAVEHIST=15000
+
+# #####
+# Binds
+# #####
+
+bindkey -e
+bindkey '^R' history-incremental-search-backward
+
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
+
+bindkey "^[[3~" delete-char
+
+accept-line-custom () {
+(( $#BUFFER == 0 )) && blank_cmd; zle accept-line
+};
+zle -N accept-line-custom; bindkey '^M' accept-line-custom
+
+# #######
+# Aliases
+# #######
+
+if [[ `uname` == "Linux" ]]; then
+	alias l="ls --color=auto"
+	alias ll="ls -lah --color=auto"
+	alias ls="ls --color=auto"
+	alias dir="ls --color=auto"
+fi
+
+if [[ `uname` == "Darwin" ]]; then
+	alias l="ls -G"
+	alias ll="ls -lahG"
+	alias ls="ls -G"
+	alias dir="ls -G"
+	export HOMEBREW_NO_EMOJI=1
+	export HOMEBREW_NO_ANALYTICS=1
+fi
+
+alias cls="clear"
+alias g="git"
+alias d="docker"
+alias k="kubectl"
+
+alias glo='git log --oneline --decorate'
+alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glola="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
+alias glog='git log --oneline --decorate --graph'
+alias gloga='git log --oneline --decorate --graph --all'
+
+alias cb="cargo build"
+alias cr="cargo run"
+alias ct="cargo test"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias foldersize="du -h --max-depth=1 | sort -hr"
+alias logout="clear && exit"
+alias kcc="kubectl config current-context"
+alias reload="source ~/.zshrc"
+
+# ###########################
+# Custom prompt configuration
+# ###########################
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 	SESSION_TYPE=remote/ssh
@@ -40,11 +114,6 @@ function blank_cmd(){
 	typeset -gi ETIME=0
 	#SHOWTIME=1
 }
-
-accept-line-custom () {
-	(( $#BUFFER == 0 )) && blank_cmd; zle accept-line
-};
-zle -N accept-line-custom; bindkey '^M' accept-line-custom
 
 #Only display my username if its not the default one.
 function prompt_user(){
@@ -229,6 +298,10 @@ zle -N zle-keymap-select
 PS1='%F{white}$(prompt_user)%F{yellow}$(prompt_hostname)$(prompt_jobs)$(prompt_git)%F{white}$(prompt_dir)$(prompt_branch)$(prompt_extra)%(?.%F{green}.%F{red})${VIMODE} %f'
 RPS1='$(prompt_exectime)' 
 
+# #######################
+# Custom helper functions
+# #######################
+
 function chpwd() {
 	emulate -L zsh
 
@@ -238,60 +311,6 @@ function chpwd() {
 		ls --color=auto
 	fi
 }
-
-export EDITOR="vim"
-
-HISTFILE=~/.zsh-history
-HISTSIZE=15000
-SAVEHIST=15000
-
-zstyle ':completion:*' menu select
-
-bindkey -e
-bindkey '^R' history-incremental-search-backward
-
-bindkey "${terminfo[khome]}" beginning-of-line
-bindkey "${terminfo[kend]}" end-of-line
-
-bindkey "^[[3~" delete-char
-
-if [[ `uname` == "Linux" ]]; then
-	alias l="ls --color=auto"
-	alias ll="ls -lah --color=auto"
-	alias ls="ls --color=auto"
-	alias dir="ls --color=auto"
-fi
-
-if [[ `uname` == "Darwin" ]]; then
-	alias l="ls -G"
-	alias ll="ls -lahG"
-	alias ls="ls -G"
-	alias dir="ls -G"
-	export HOMEBREW_NO_EMOJI=1
-	export HOMEBREW_NO_ANALYTICS=1
-fi
-
-alias cls="clear"
-alias g="git"
-alias d="docker"
-alias k="kubectl"
-
-alias glo='git log --oneline --decorate'
-alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias glola="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-alias glog='git log --oneline --decorate --graph'
-alias gloga='git log --oneline --decorate --graph --all'
-
-alias cb="cargo build"
-alias cr="cargo run"
-alias ct="cargo test"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias foldersize="du -h --max-depth=1 | sort -hr"
-alias logout="clear && exit"
-alias kcc="kubectl config current-context"
-alias reload="source ~/.zshrc"
 
 # Cross-session directory stack
 function pu(){
@@ -378,6 +397,10 @@ function ring(){
 
 	reattach-to-user-namespace osascript -e "display notification \"Command $1 has finished in $DURATION seconds.\" with title \"Ring\""
 }
+
+# ############################
+# Load external configurations
+# ############################
 
 # Load plugins
 source ~/dots/extract.plugin.zsh
