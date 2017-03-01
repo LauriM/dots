@@ -22,6 +22,10 @@ set nobackup
 filetype plugin on
 filetype indent on
 
+set path+=**
+
+set wildmenu
+
 set showmatch
 set number
 set novisualbell
@@ -131,6 +135,8 @@ let g:ctrlp_working_path_mode = 0
 
 "By default
 let g:SuperTabDefaultCompletionType = "<c-p>"
+
+let g:startify_custom_header = ['','   Vim']
 
 " ############
 " Autocommands
