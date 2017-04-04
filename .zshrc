@@ -158,7 +158,7 @@ function prompt_git(){
 		NEEDSPACE=1
 	fi
 
-	git diff --quiet >& /dev/null
+	git diff --ignore-submodules --quiet >& /dev/null
 	if [[ $? == 1 ]]; then
 		OUTPUT=${OUTPUT}"%F{blue}%%"
 		NEEDSPACE=1
