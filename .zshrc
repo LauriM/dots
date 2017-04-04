@@ -150,7 +150,10 @@ function prompt_git(){
 	NEEDSPACE=0
 	OUTPUT=''
 
-	if [[ `git log --branches --not --remotes |wc -l|xargs` != 0 ]]; then
+	BRANCH=$(parse_git_branch)
+	BRANCH="${BRANCH/refs\/\heads\//}"
+
+	if [[ `git log --branches --not --remotes --pretty=%d|grep $BRANCH|wc -l|xargs` != 0 ]]; then
 		OUTPUT=${OUTPUT}"%F{green}^"
 		NEEDSPACE=1
 	fi
