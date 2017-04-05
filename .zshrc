@@ -392,12 +392,13 @@ function zsh_stats() {
 
 # Make a notification (ring) after a command is done
 function ring(){
-
 	typeset -gi START=SECONDS
 	$@
 	typeset -gi DURATION=SECONDS-START
 
-	reattach-to-user-namespace osascript -e "display notification \"Command $1 has finished in $DURATION seconds.\" with title \"Ring\""
+	if [[ `uname` == "Darwin" ]]; then
+		reattach-to-user-namespace osascript -e "display notification \"Command $1 has finished in $DURATION seconds.\" with title \"Ring\""
+	fi
 }
 
 # ############################
