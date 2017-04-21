@@ -7,7 +7,6 @@ autoload promptinit compinit
 promptinit
 compinit
 
-setopt autocd
 setopt prompt_subst
 setopt correct
 setopt inc_append_history

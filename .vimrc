@@ -62,8 +62,8 @@ else
   "color darkblue
   "color relaxedgreen
   "color koehler
-  color dante
-  "color delek
+  "color dante
+  color delek
   "color rootwater
   "color smyck
   "color solarized
