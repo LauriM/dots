@@ -434,6 +434,7 @@ if [ -f ~/.zshrc_local ]; then
 	source ~/.zshrc_local
 fi
 
+uptime
 
 function retrieve_latest_version() {
 	git ls-remote http://github.com/laurim/dots HEAD > ~/.dots_version_hash_temp
