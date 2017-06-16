@@ -225,7 +225,7 @@ function prompt_dir(){
 		return; #Its my default home, lets hide the ~
 	fi
 
-	if [[ $PWD == '/Users/laurim' ]]; then
+	if [[ $PWD == '/Users/lauri' ]]; then
 		return; #Its my default home, lets hide the ~
 	fi
 
