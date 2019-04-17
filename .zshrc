@@ -141,6 +141,10 @@ parse_git_branch() {
 #show ^ if the directory has commits that aren't pushed
 #Show {branch} if branch isn't master
 function prompt_git(){
+	if (( ${+DOTS_GIT_DISABLE} )); then
+		return # Disable git with a env variable
+	fi
+
 	git ls-files -u >& /dev/null
 	if [[ $? != 0 ]]; then
 		return #No .git found! Abort!
@@ -171,6 +175,10 @@ function prompt_git(){
 }
 
 function prompt_branch() {
+	if (( ${+DOTS_GIT_DISABLE} )); then
+		return # Disable git with a env variable
+	fi
+
 	git ls-files -u >& /dev/null
 	if [[ $? != 0 ]]; then
 		return #No .git found! Abort!
@@ -196,6 +204,10 @@ function prompt_branch() {
 }
 
 function prompt_svn(){
+	if (( ${+DOTS_SVN_DISABLE} )); then
+		return # Disable svn with a env variable
+	fi
+
 	svn status >& /dev/null
 	if [[ $? != 0 ]]; then
 		return #No svn installed!
@@ -444,4 +456,4 @@ function retrieve_latest_version() {
 }
 
 # Retrieve latest dots version on background
-( retrieve_latest_version > /dev/null 2>&1 & )
+#( retrieve_latest_version > /dev/null 2>&1 & )
