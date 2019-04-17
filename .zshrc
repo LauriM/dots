@@ -23,6 +23,11 @@ export HISTFILE=~/.zsh-history
 export HISTSIZE=15000
 export SAVEHIST=15000
 
+if [[ `cat /proc/version|grep Microsoft|wc -l` == 1 ]]; then
+	# We are inside windows subsystem, some differences
+	export WINDOWS_SUBSYSTEM=1 
+fi
+
 # #####
 # Binds
 # #####
@@ -455,5 +460,7 @@ function retrieve_latest_version() {
 	mv ~/.dots_version_hash_temp ~/.dots_version_hash
 }
 
-# Retrieve latest dots version on background
-#( retrieve_latest_version > /dev/null 2>&1 & )
+# Retrieve latest dots version on background, only if on real linux
+if [ -z $WINDOWS_SUBSYSTEM ]; then
+	( retrieve_latest_version > /dev/null 2>&1 & )
+fi
