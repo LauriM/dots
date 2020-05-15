@@ -5,8 +5,6 @@
 set nocompatible
 set nomodeline
 
-call pathogen#infect()
-
 " ###################
 " Generic vim options
 " ###################
@@ -27,6 +25,7 @@ set path+=**
 set wildmenu
 
 set showmatch
+set showmode
 set number
 set novisualbell
 set autoread
@@ -54,24 +53,10 @@ if has("gui_running")
   winpos 1 1
   set lines=999
   set columns=999
-  "set cursorline
-  "set cursorcolumn
-  color badwolf
   "color solarized
 else
-  "color darkblue
-  "color relaxedgreen
-  "color koehler
-  "color dante
-  color delek
-  "color rootwater
-  "color smyck
   "color solarized
 endif
-
-if has("win32") || has("win64")
-  map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-end
 
 " ################
 " General keybinds
@@ -100,13 +85,6 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-nmap <C-X> :FSHere<CR>
-nmap <F7> :NERDTreeToggle<cr>
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
-map <C-t> :split<CR>:exec("tag ".expand("<cword>"))<CR>
-map <C-y> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 nnoremap <leader>p p
 nnoremap <leader>P P
@@ -122,7 +100,6 @@ vnoremap <space> zf
 
 "tags
 set tags=./tags;/;tags-static
-set ofu=syntaxcomplete#Complete
 
 "statusline
 set stl=%f\ %m\ %r\ Line:\ %l/%L[%p%%]\ Col:\ %c\ Buf:\ #%n
@@ -130,35 +107,6 @@ set laststatus=2
 
 "ignores
 set wildignore+=*.class,*.exe,*.log,*.tlog,*pdb,*.ilk,*obj,*/_site/*,*/.git/*,*/_gist_cache/*,*/node_modules/*,*.o,*.a,*.tmp,./html/,._*,*.pp,target
-
-let g:ctrlp_working_path_mode = 0
-
-"By default
-let g:SuperTabDefaultCompletionType = "<c-p>"
-
-let g:startify_custom_header = ['','   Vim']
-
-" ############
-" Autocommands
-" ############
-
-"Automatically add gates for .h files
-function! s:insert_gates()
-  let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
-  execute "normal! i#ifndef " . gatename
-  execute "normal! o#define " . gatename . " "
-  execute "normal! Go#endif /* " . gatename . " */"
-  normal! kkjo
-endfunction
-autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
-
-augroup filetype
-  au! BufRead,BufNewFile *.proto setfiletype proto
-augroup end
-
-au BufRead,BufNewFile *.sqf,*.sqs  setf sqf
-
-au BufRead,BufNewFile *.go map <F5> :GoBuild<CR>
 
 " ####################
 " Load local additions
