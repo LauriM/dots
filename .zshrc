@@ -62,8 +62,6 @@ fi
 
 alias cls="clear"
 alias g="git"
-alias d="docker"
-alias k="kubectl"
 
 alias glo='git log --oneline --decorate'
 alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -78,8 +76,6 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias foldersize="du -h --max-depth=1 | sort -hr"
-alias logout="clear && exit"
-alias kcc="kubectl config current-context"
 alias reload="source ~/.zshrc"
 
 # ###########################
@@ -203,29 +199,6 @@ function prompt_branch() {
 	fi
 }
 
-function prompt_svn(){
-	if (( ${+DOTS_SVN_DISABLE} )); then
-		return # Disable svn with a env variable
-	fi
-
-	svn status >& /dev/null
-	if [[ $? != 0 ]]; then
-		return #No svn installed!
-	fi
-
-	if [ ! -d ".svn" ]; then
-		return #Not svn root!
-	fi
-
-	OUTPUT=''
-
-	if [[ `svn status|wc -l|xargs` != 0 ]]; then
-		OUTPUT="%F{yellow}%% "
-	fi
-
-	echo $OUTPUT
-}
-
 function prompt_exectime(){
 	if [[ $ETIME > 0 ]]; then
 		echo "%F{yellow}[%F{white}"$ETIME"%F{yellow}]"
@@ -279,26 +252,6 @@ function prompt_jobs(){
 	fi
 }
 
-# check internal version of the dots files
-function prompt_version() {
-	# don't check if we don't have the file
-	if [ -f ~/.dots_version_hash ]; then
-		CURRENT=`git --git-dir="$HOME/dots/.git" --work-tree="$HOME/dots" rev-parse HEAD`
-
-		if [[ `cat ~/.dots_version_hash | grep $CURRENT` == "" ]]; then
-			echo "%F{cyan}>"
-		fi
-
-	fi
-}
-
-# Get extra prompt magic from the _local config
-function prompt_extra() {
-	if typeset -f prompt_extra_actual > /dev/null; then
-		prompt_extra_actual
-	fi
-}
-
 VIMODE='$'
 function zle-line-init zle-keymap-select {
 	VIMODE="${${KEYMAP/vicmd/#}/(main|viins)/$}"
@@ -308,13 +261,14 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-PS1='%F{white}$(prompt_user)%F{yellow}$(prompt_hostname)$(prompt_jobs)$(prompt_git)%F{white}$(prompt_dir)$(prompt_branch)$(prompt_extra)%(?.%F{green}.%F{red})${VIMODE} %f'
+PS1='%F{white}$(prompt_user)%F{yellow}$(prompt_hostname)$(prompt_jobs)$(prompt_git)%F{white}$(prompt_dir)$(prompt_branch)%(?.%F{green}.%F{red})${VIMODE} %f'
 RPS1='$(prompt_exectime)' 
 
 # #######################
 # Custom helper functions
 # #######################
 
+# print ls when changing directory
 function chpwd() {
 	emulate -L zsh
 
@@ -339,66 +293,12 @@ function pd(){
 }
 
 #HELPER FUNCTIONS
-
 function ss(){ #Search source
 	grep -inIEr --exclude-dir=.svn --color=ALWAYS "$*" .
 }
 
-function sss(){ #Search source in src/
-	grep -inIEr --exclude-dir=.svn --color=ALWAYS "$*" ./src/
-}
-
-function lsg(){ #ls grep
-	ls -lah | grep -i $*
-}
-
-function findg(){ #find grep
-	find | grep -i $*
-}
-
-function hg(){ #history grep
-	history 1 | grep -i $*
-}
-
-function gs(){ #grep search
-	grep -inIEr --color=ALWAYS "$*" .
-}
-
 function f(){
 	find . -name "*$**"
-}
-
-function dots_update(){
-	git --git-dir="$HOME/dots/.git" --work-tree="$HOME/dots" pull &
-	retrieve_latest_version
-}
-
-function n(){
-	vim ~/.scratch.txt
-}
-
-function dps() {
-	docker ps | perl -ne '@cols = split /\s{2,}/, $_; printf "%30s %20s %20s\n", $cols[1], $cols[2], $cols[4]'
-}
-
-function tags() {
-	A=`cat tags|wc -l`
-	ctags -R .
-	B=`cat tags|wc -l`
-	typeset -gi D=B-A
-
-	echo "$B tags, diff: $D"
-}
-
-# Calculator
-function = 
-{
-	echo "$@" | bc -l
-}
-alias calc="="
-
-function zsh_stats() {
-	fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n40
 }
 
 # Make a notification (ring) after a command is done
@@ -415,20 +315,6 @@ function ring(){
 # ############################
 # Load external configurations
 # ############################
-
-# Load plugins
-source ~/dots/extract.plugin.zsh
-
-if [[ `uname` == "Darwin" ]]; then
-	if  [ -f ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-		# Tmux causes issues with this plugin
-		if [ -z "$TMUX" ]; then
-			source ~/dots/zsh-autosuggestions/zsh-autosuggestions.zsh
-		fi
-	else
-		echo "! Remember to update submodules !"
-	fi
-fi
 
 # Scan for nocorrect commands
 if [ -f ~/.zsh_nocorrect ]; then

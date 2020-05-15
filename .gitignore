@@ -3,3 +3,5 @@
 # Ignored because it will be manually installed for each system
 vimfiles/bundle/YouCompleteMe/
 vimfiles/bundle/YouCompleteMe/*
+
+.DS_Store
