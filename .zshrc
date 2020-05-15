@@ -23,11 +23,6 @@ export HISTFILE=~/.zsh-history
 export HISTSIZE=15000
 export SAVEHIST=15000
 
-if [[ `cat /proc/version|grep Microsoft|wc -l` == 1 ]]; then
-	# We are inside windows subsystem, some differences
-	export WINDOWS_SUBSYSTEM=1 
-fi
-
 # #####
 # Binds
 # #####
@@ -440,15 +435,3 @@ if [ -f ~/.zshrc_local ]; then
 fi
 
 uptime
-
-function retrieve_latest_version() {
-	git ls-remote http://github.com/laurim/dots HEAD > ~/.dots_version_hash_temp
-
-	# Moving to prevent empty file being present
-	mv ~/.dots_version_hash_temp ~/.dots_version_hash
-}
-
-# Retrieve latest dots version on background, only if on real linux
-if [ -z $WINDOWS_SUBSYSTEM ]; then
-	( retrieve_latest_version > /dev/null 2>&1 & )
-fi
