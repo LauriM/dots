@@ -213,6 +213,10 @@ function prompt_dir(){
 	if [[ $PWD == '/Users/lauri' ]]; then
 		return; #Its my default home, lets hide the ~
 	fi
+	
+	if [[ $PWD == '/Users/laurim' ]]; then
+		return; #Its my default home, lets hide the ~
+	fi
 
 	if [[ -w $PWD ]]; then
 		PREFIX=`echo ""`
